@@ -22,14 +22,12 @@ public enum MapRouter: NavigationRouter {
     }
     
     @ViewBuilder
-    public func view(coordinator: Coordinator<MapRouter>) -> some View {
+    public func view() -> some View {
         switch self {
         case .map:
             MapView()
-                .environmentObject(coordinator)
         case .city(named: let name):
             CityView(name: name)
-                .environmentObject(coordinator)
         }
     }
 }

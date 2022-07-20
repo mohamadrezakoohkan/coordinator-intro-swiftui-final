@@ -23,8 +23,9 @@ open class Coordinator<Router: NavigationRouter>: ObservableObject {
     }
     
     public func show(_ route: Router, animated: Bool = true) {
-        let viewController: UIViewController = hostingController(route)
-        
+        let view = route.view()
+        let viewWithCoordinator = view.environmentObject(self)
+        let viewController = UIHostingController(rootView: viewWithCoordinator)
         switch route.transition {
         case .push:
             navigationController.pushViewController(viewController, animated: animated)
@@ -51,10 +52,4 @@ open class Coordinator<Router: NavigationRouter>: ObservableObject {
             self?.navigationController.viewControllers = []
         }
     }
-    
-    private func hostingController(_ route: Router) -> UIHostingController<Router.V> {
-        let view = route.view(coordinator: self)
-        let controller = UIHostingController(rootView: view)
-        return controller
-     }
 }

@@ -16,5 +16,5 @@ public protocol NavigationRouter {
     /// Creates and returns a view of assosiated type
     ///
     @ViewBuilder
-    func view(coordinator: Coordinator<Self>) -> V
+    func view() -> V
 }
